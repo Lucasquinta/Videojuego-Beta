@@ -2,13 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include "colores.h"
 #include "libreria.h"
-#define CYAN    "\033[1;36m"
-#define RESET   "\033[0m"
-#define GREEN   "\033[1;32m"
-#define MAGENTA "\033[1;35m"
-#define YELLOW  "\033[1;33m"
-#define RED     "\033[1;31m"
 
 //Creo la funcion
 void juego() {
@@ -23,10 +18,12 @@ void juego() {
     int lupa_usada = 0;
 
     while (1) {
-        if (x.cpuv == 0) {
+        if (x.cpuv <= 0) {
+            tablero(x);
             printf(MAGENTA"El rival murió ¡has ganado!\n"RESET);
             break;
-        } else if (x.jugadorv == 0) {
+        } else if (x.jugadorv <= 0) {
+            tablero(x);
             printf(MAGENTA"\t¡Has perdido!\n"RESET);
             break;
         }
@@ -45,9 +42,17 @@ void juego() {
             lupa_usada = 0;
         }
         //Hago un if que indica que si el objeto es distinto a 2, nos va         a indicar si queremos disparar a nostoros o al rival 
-        if (x.objeto != 2) { 
-            printf(MAGENTA"\n\n¿Deseas dispararle al rival presiona (1) o a ti mismo presiona(2)?\n"RESET);
-            scanf("%d", &x.jugador);
+        if (x.objeto != 2) {
+            do{
+                printf(MAGENTA"\n\n¿Quieres dispararle al rival(1) o a ti mismo(2)?\n"RESET);
+                if (scanf("%d", &x.jugador) != 1 || x.jugador > 3){
+                        limpiarCarga();
+                        printf(MAGENTA"\nOpcion invalida, ingrese una opcion valida.\n"RESET);
+                    while (getchar() != '\n');
+                } else {
+                    break;
+                }
+            } while (1);
             //Hago un if que indica que si el jugador presiona 1 le                     dispara al rival
             if (x.jugador == 1) {
                 printf(RED"Le disparaste al rival\n"RESET);
@@ -71,21 +76,25 @@ void juego() {
                     x.jugadorv -= x.dano;
                     printf(CYAN"La bala es verdadera\n"RESET, x.jugadorv);
                     x.dano = 1;
+                    juego();
                 //Agrego que de lo contrario la bala sera falsa y la vida                 seguira igual
                 } else {
                     printf(CYAN"La bala es falsa\n"RESET);
                     x.dano = 1;
+                    juego();
                 }
                 //Llamo la funcion del rival, con sus variables que van                    a hacer lo mismo que nosotros
                 rival(&x);
             }
         }
         //Creo un if que indica que si las vidas del rival son 0, se                acaba el juego y ganamos 
-        if (x.cpuv == 0) {
+        if (x.cpuv <= 0) {
+            tablero(x);
             printf(MAGENTA"El rival ha muerto ¡has ganado!\n"RESET);
             break;
         //De lo contrario creo otro if que indica que si las vidas del                 jugador son 0, se acaba el juego y perdimos
-        } else if (x.jugadorv == 0) {
+        } else if (x.jugadorv <= 0) {
+            tablero(x);
             printf(MAGENTA"Has muerto\n"RESET);
             break;
         }

@@ -46,7 +46,7 @@ void juego() {
         }
         //Hago un if que indica que si el objeto es distinto a 2, nos va         a indicar si queremos disparar a nostoros o al rival 
         if (x.objeto != 2) { 
-            printf(MAGENTA"\n\n¿Quieres dispararle al rival(1) o a ti mismo(2)?\n"RESET);
+            printf(MAGENTA"\n\n¿Deseas dispararle al rival presiona (1) o a ti mismo presiona(2)?\n"RESET);
             scanf("%d", &x.jugador);
             //Hago un if que indica que si el jugador presiona 1 le                     dispara al rival
             if (x.jugador == 1) {

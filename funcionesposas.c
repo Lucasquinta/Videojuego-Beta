@@ -1,15 +1,11 @@
 #include <stdio.h>
+#include "colores.h"
 #include "libreria.h"
-#define CYAN    "\033[1;36m"
-#define RESET   "\033[0m"
-#define GREEN   "\033[1;32m"
-#define MAGENTA "\033[1;35m"
-#define YELLOW  "\033[1;33m"
-#define RED     "\033[1;31m"
 
 //Creo la funcion de las esposas, que nos va a indicar que al utilizarla, se salta el turno del usuario
 void esposas(struct xd* x) {
-    printf(GREEN"Has usado las esposas\n"RESET);
+    tablero(x);
+    printf(GREEN"El rival pierde un turno\n"RESET);
     x->cpuv = 5;
         //Agrego 5 vidas al usuario
         x->jugadorv = 5;
@@ -17,9 +13,11 @@ void esposas(struct xd* x) {
         x->dano = 1;
     while(1){
             if (x->cpuv == 0) {
-                printf(MAGENTA"El rival ha muerto ¡has ganado!\n"RESET);
+                tablero(x);
+                printf(MAGENTA"El rival murió ¡has ganado!\n"RESET);
                 break;
             } else if (x->jugadorv == 0) {
+                tablero(x);
                 printf(MAGENTA"\t¡Has perdido!\n"RESET);
                 break;
             }

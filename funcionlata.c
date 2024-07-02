@@ -20,7 +20,7 @@ void lata(){
    x.bala = rand() % 2;
   //Creamos en un if que si la bala es 1, sacaremos una bala verdadera
   if(x.bala == 1){
-    printf("Has sacado bala verdadera\n");
+    printf("Has sacado una bala verdadera\n");
     x.bala = rand() % 2;
   }
   //De lo contrario crearemos otro if que nos indica que si la bala es 0,     sacaremos una bala falsa  

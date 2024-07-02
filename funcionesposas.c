@@ -17,7 +17,7 @@ void esposas(struct xd* x) {
         x->dano = 1;
     while(1){
             if (x->cpuv == 0) {
-                printf(MAGENTA"El rival murió ¡has ganado!\n"RESET);
+                printf(MAGENTA"El rival ha muerto ¡has ganado!\n"RESET);
                 break;
             } else if (x->jugadorv == 0) {
                 printf(MAGENTA"\t¡Has perdido!\n"RESET);
